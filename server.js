@@ -1,11 +1,24 @@
-const dotenv = require('dotenv')
 const path = require('path');
 const express = require('express');
 const bird_router = require('./routers/bird_router');
 const image_router = require('./routers/image_router');
+require("dotenv").config();
 
-/* load .env */
-dotenv.config();
+// TODO: connect to a database
+const mongoose = require("mongoose");
+const user = process.env.COMPASS_USER;
+const pass = process.env.COMPASS_PASSWORD;
+const db_url = `mongodb+srv://${user}:${pass}@cluster0.v5m7qs7.mongodb.net/birds`
+const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}
+mongoose.connect(db_url, options).then(() => {
+    console.log('successfully connected!')
+}).catch((e) => {
+    console.error(e, 'could not connect!')
+});
+
 
 /* create Express app */
 const app = express();
@@ -28,9 +41,10 @@ app.get('/', (req, res) => {
 
 app.use('/birds/', bird_router);
 
+
 // TODO: 404 page
 
-// TODO: connect to a database
+
 
 /* start the server */
 const PORT = process.env.PORT;
