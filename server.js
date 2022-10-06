@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 app.use('/birds/', bird_router);
 
 // TODO: 404 page
-app.get('*', (request, response) => {
+app.get('/*', (request, response) => {
     response.status(404);
     response.render('404');
 })

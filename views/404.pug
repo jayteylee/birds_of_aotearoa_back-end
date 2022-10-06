@@ -4,9 +4,14 @@ html(lang='en')
     title Home Page
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/styles/layout.css')
+    link(rel='stylesheet', href='/styles/theme.css')
+    link(rel='stylesheet', href='/styles/conservation-status.css')
+    link(rel='stylesheet', href='/styles/cards.css')
   body
     include templates/header.pug
+    aside
     main
-      h1 404 Page Not Found
-      p Did you take a wrong turn?
+        h1 404 Page Not Found
+            p Did you take a wrong turn?
     include templates/footer.pug
