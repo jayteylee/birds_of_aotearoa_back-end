@@ -8,18 +8,19 @@ const birdSchema = new mongoose.Schema({
     order: { type: String, required: true },
     family: { type: String, required: true },
     other_names: { type: [String], required: true},
+    status: { type: String, required: true },
     photo: {
-        credit: String,
-        source: String
+        credit: { type: String, required: true },
+        source: { type: String, required: true },
     },
     size: {
         length: {
-            value: Number,
-            units: String
+            value: { type: Number, required: true },
+            units: { type: String, required: true },
         },
         weight: {
-            value: Number,
-            units: String
+            value: { type: Number, required: true },
+            units: { type: String, required: true },
         }
     }
 })

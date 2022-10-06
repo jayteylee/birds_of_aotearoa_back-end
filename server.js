@@ -8,7 +8,8 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const user = process.env.COMPASS_USER;
 const pass = process.env.COMPASS_PASSWORD;
-const db_url = `mongodb+srv://${user}:${pass}@cluster0.v5m7qs7.mongodb.net/birds`
+// const db_url = `mongodb+srv://${user}:${pass}@cluster0.v5m7qs7.mongodb.net/birds`
+const db_url = `mongodb+srv://${user}:${pass}@cluster0.v5m7qs7.mongodb.net/?retryWrites=true&w=majority`
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
