@@ -1,0 +1,54 @@
+doctype html
+html(lang='en')
+    head
+        title COSC203: Birds of Aotearoa
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='stylesheet', href='/styles/layout.css')
+        link(rel='stylesheet', href='/styles/theme.css')
+        link(rel='stylesheet', href='/styles/conservation-status.css')
+        link(rel='stylesheet', href='/styles/cards.css')
+        script(defer, src='/scripts/populate_form.js')
+    body
+        include templates/header.pug
+        aside
+            a(href='/')
+                button(type="button") Home
+            include templates/status_legend.pug
+        main
+            section(class='card')
+                div(class="card-image")
+                    img(src=`/images/${bird.photo.source}` alt=`Photo of ${bird.primary_name}`)
+                    div(class="card-title")
+                        p(lang="mi") #{bird.primary_name}
+                        span Photo by #{bird.photo.credit}
+                    div(class=`circle ${bird.status.replace(' ', '-')}`)
+                div(class="card-content")
+                    h2(class="card-title") 
+                    ul
+                        li
+                            b Scientific
+                            span=bird.scientific_name
+                        li
+                            b Family
+                            span=bird.family
+                        li
+                            b Order 
+                            span=bird.order
+                        li
+                            b Status 
+                            span=bird.status
+                        li
+                            b Length 
+                            span=`${bird.size.length.value} ${bird.size.length.units}`
+                        li
+                            b Weight 
+                            span=`${bird.size.weight.value} ${bird.size.weight.units}`
+                        a(href=`/birds/${bird._id}/edit`)
+                            button Edit Bird
+                        a(href=`/birds/${bird._id}/delete`)
+                            button Delete Bird
+        include templates/footer.pug
+
+
+

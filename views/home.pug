@@ -12,6 +12,10 @@ html(lang='en')
     body
         include templates/header.pug
         aside
+            a(href='/')
+                button(type="button") Home
+            a(href='/birds/create/')
+                button(type="button") create new bird
             include templates/filter_form.pug
             include templates/status_legend.pug
         main

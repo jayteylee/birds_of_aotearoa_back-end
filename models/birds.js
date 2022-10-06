@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 // create a schema
 const birdSchema = new mongoose.Schema({
+    _id: mongoose.Schema.ObjectId,
     primary_name: { type: String, required: true },
     english_name: { type: String, reqired: true },
     scientific_name: { type: String, required: true },
@@ -10,17 +11,17 @@ const birdSchema = new mongoose.Schema({
     other_names: { type: [String], required: true},
     status: { type: String, required: true },
     photo: {
-        credit: { type: String, required: true },
-        source: { type: String, required: true },
+        credit: { type: String },
+        source: { type: String },
     },
     size: {
         length: {
-            value: { type: Number, required: true },
-            units: { type: String, required: true },
+            value: { type: Number },
+            units: { type: String },
         },
         weight: {
-            value: { type: Number, required: true },
-            units: { type: String, required: true },
+            value: { type: Number },
+            units: { type: String },
         }
     }
 })
