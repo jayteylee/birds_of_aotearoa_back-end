@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
 })
 
 // TODO: finish the "Create" route(s)
-router.get('/create', (req, res) => {
+router.get('/create', async (req, res) => {
     res.render('create');
 });
 
@@ -33,10 +33,10 @@ router.post('/create', upload.single('photo_upload'), async (req, res) => {
     const scientific_name = req.body.scientific_name;
     const order = req.body.order;
     const family = req.body.family;
-    const other_names = req.body.other_names;
+    const other_names = req.body.other_names.split('\r\n');
     const status = req.body.status;
     const credit = req.body.photo_credit;
-    const photo_source = '';
+    let photo_source = '';
     if (req.file !== undefined) {
         photo_source = req.file.filename;
     }
@@ -70,20 +70,30 @@ router.post('/create', upload.single('photo_upload'), async (req, res) => {
     res.redirect('/');
 });
 
-router.post('/edit', upload.single('photo_upload'), async (req, res) => {
+// TODO: Update bird route(s)
+router.get('/:id/edit', async (req, res) => {
+    const id = req.params.id;
+    const birds = await Bird.findById(id);
+    res.render('edit', { bird: birds });
+});
+
+router.post('/:id/edit', upload.single('photo_upload'), async (req, res) => {
+    const id = req.params.id;
     const primary_name = req.body.primary_name;
     const english_name = req.body.english_name;
     const scientific_name = req.body.scientific_name;
     const order = req.body.order;
     const family = req.body.family;
-    const other_names = req.body.other_names;
+    const other_names = req.body.other_names.split('\r\n');
     const status = req.body.status;
     const credit = req.body.photo_credit;
     let photo_source = '';
-    console.log(photo_source);
     if (req.file !== undefined) {
         photo_source = req.file.filename;
-        console.log(photo_source);
+    }else{
+        const prev = await Bird.findById(id);
+        console.log(prev.photo.source);
+        photo_source = prev.photo.source;
     }
     const length = req.body.length;
     const weight = req.body.weight;
@@ -121,12 +131,6 @@ router.get('/:id', async (req, res) => {
     res.render('bird', { bird: birds });
 });
 
-// TODO: Update bird route(s)
-router.get('/:id/edit', async (req, res) => {
-    const id = req.params.id;
-    const birds = await Bird.findById(id);
-    res.render('edit', { bird: birds });
-});
 
 // TODO: Delete bird route(s)
 router.get('/:id/delete', async (req, res) => {

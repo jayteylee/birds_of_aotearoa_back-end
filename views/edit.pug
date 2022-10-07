@@ -15,7 +15,7 @@ html(lang='en')
             a(href='/')
                 button(type="button") Home
         main
-            form(action='/birds/edit' method='POST' enctype="multipart/form-data")
+            form(action=`/birds/${bird._id}/edit` method='POST' enctype="multipart/form-data")
                 input(type='hidden' name='id' value=`${bird._id}`)
                 fieldset
                     legend Common Names
@@ -24,7 +24,8 @@ html(lang='en')
                     label(for='english_name') English Name
                     input(type='text' name='english_name' value=`${bird.english_name}`)
                     label(for='other_names') Other Names 
-                    textarea(name="other_names", cols="50", rows="10" value=`${bird.other_names}`) 
+                    -var otherNames = bird.other_names.join('\r\n');
+                    textarea(name="other_names", cols="50", rows="10")=otherNames
                 fieldset 
                     legend Taxonomy
                     label(for='scientific_name') Scientific Name

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 // create a schema
 const birdSchema = new mongoose.Schema({
-    _id: mongoose.Schema.ObjectId,
+    // _id: mongoose.Schema.ObjectId,
     primary_name: { type: String, required: true },
     english_name: { type: String, reqired: true },
     scientific_name: { type: String, required: true },
